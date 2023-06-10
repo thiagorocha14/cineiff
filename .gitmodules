@@ -1,0 +1,6 @@
+[submodule "cineiff_frontend"]
+	path = cineiff_frontend
+	url = https://github.com/thiagorocha14/cineiff_frontend
+[submodule "cineiff_backend"]
+	path = cineiff_backend
+	url = https://github.com/thiagorocha14/cineiff_backend
