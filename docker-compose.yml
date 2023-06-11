@@ -1,0 +1,33 @@
+version: "3"
+services:
+    cineiff-front:
+        container_name: cineiff-front
+        build:
+            context: ./cineiff_frontend
+            dockerfile: Dockerfile
+        ports:
+            - "4201:4200"
+        volumes:
+            - ./cineiff_frontend:/app
+    cineiff-back:
+        container_name: cineiff-back
+        build:
+            context: ./cineiff_backend
+            dockerfile: Dockerfile
+        ports:
+            - 8000:8000
+        volumes:
+            - ./cineiff_backend:/var/www/html
+        environment:
+            - APP_ENV=local
+            - APP_DEBUG=true
+        depends_on:
+            - cineiff-db
+    cineiff-db:
+        container_name: cineiff-db
+        image: mysql:8.0
+        ports:
+            - 3300:3306
+        environment:
+            - MYSQL_DATABASE=cineiff
+            - MYSQL_ROOT_PASSWORD=danielthiago
