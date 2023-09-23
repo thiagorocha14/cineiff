@@ -9,7 +9,9 @@ services:
         ports:
             - "4201:4200"
         volumes:
+            - "/app/node_modules"
             - ./cineiff_frontend:/app
+        command: ng serve --host 0.0.0.0 --disable-host-check --poll 1
     cineiff-back:
         restart: always
         container_name: cineiff-back
@@ -20,9 +22,8 @@ services:
             - 8000:8000
         volumes:
             - ./cineiff_backend:/var/www/html
-        environment:
-            - APP_ENV=local
-            - APP_DEBUG=true
+        env_file:
+            - ./cineiff_backend/.env
         depends_on:
             - cineiff-db
     cineiff-db:
